@@ -1,0 +1,6 @@
+filebeat.inputs:
+- type: log
+  paths:
+    - data/gein-noa-catalog.txt 
+output.logstash:
+  hosts: ["logstash:5044"]
