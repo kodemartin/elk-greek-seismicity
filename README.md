@@ -49,20 +49,20 @@ process. Here is a map of the services and the respective operations:
   Once `logstash` is up and running, you can start the `filebeat`
   service
 
-    $ docker-compose up filebeat
+        $ docker-compose up filebeat
 
   You can monitor the creation of the index by direct calls to Elasticsearch
   API, like so:
 
-    $ curl -XGET 'localhost:9200/\_cat/indices?v'
-    health status index                uuid                   pri rep docs.count docs.deleted store.size pri.store.size
-    green  open   gein-noa-earthquakes bWjO5dKQRuujui\_N-Dk-4w   1   0     276401 0     67.6mb         67.6mb
+        $ curl -XGET 'localhost:9200/\_cat/indices?v'
+        health status index                uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+        green  open   gein-noa-earthquakes bWjO5dKQRuujui\_N-Dk-4w   1   0     276401 0     67.6mb         67.6mb
 
   This is the final count (i.e. 276401) of document for this particular example.
 
 * Explore and visualize in Kibana
 
-    $ docker-compose up -d kibana
+        $ docker-compose up -d kibana
 
   Visit http://localhost:5601 and perform the following:
 
