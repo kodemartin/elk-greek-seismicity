@@ -1,0 +1,3 @@
+- pipeline.id: main-gein
+  path.config: "/usr/share/pipeline/gein-noa.catalog.conf"
+  pipeline.workers: 2

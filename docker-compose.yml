@@ -47,13 +47,18 @@ services:
             xpack.monitoring.enabled: "true"
         volumes:
             - type: bind
+              source: ./pipeline.yml
+              target: /usr/share/logstash/config/pipeline.yml
+            - type: bind
+              source: ./templates/
+              target: /usr/share/logstash/templates/
+            - type: bind
               source: ./pipeline/
               target: /usr/share/logstash/pipeline/
         networks:
             esnet:
         depends_on:
             - es0
-        
 
 networks:
     esnet:
