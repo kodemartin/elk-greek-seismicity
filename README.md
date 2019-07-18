@@ -39,7 +39,7 @@ process. Here is a map of the services and the respective operations:
 
 * Invoke the pipeline
 
-    $ docker-compose up logstash
+      $ docker-compose up logstash
 
   This starts also the `es0` service, that is the elasticsearch server,
   at http://localhost:9200.
@@ -49,20 +49,20 @@ process. Here is a map of the services and the respective operations:
   Once `logstash` is up and running, you can start the `filebeat`
   service
 
-        $ docker-compose up filebeat
+      $ docker-compose up filebeat
 
   You can monitor the creation of the index by direct calls to Elasticsearch
   API, like so:
 
-        $ curl -XGET 'localhost:9200/\_cat/indices?v'
-        health status index                uuid                   pri rep docs.count docs.deleted store.size pri.store.size
-        green  open   gein-noa-earthquakes bWjO5dKQRuujui\_N-Dk-4w   1   0     276401 0     67.6mb         67.6mb
+      $ curl -XGET 'localhost:9200/\_cat/indices?v'
+      health status index                uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+      green  open   gein-noa-earthquakes bWjO5dKQRuujui\_N-Dk-4w   1   0     276401 0     67.6mb         67.6mb
 
   This is the final count (i.e. 276401) of document for this particular example.
 
 * Explore and visualize in Kibana
 
-        $ docker-compose up -d kibana
+      $ docker-compose up -d kibana
 
   Visit http://localhost:5601 and perform the following:
 
@@ -108,7 +108,7 @@ The custom configuration is specified in `filebeat.yml` that reads:
 > NOTE: The `logstash:5044` endpoint is reachable only through the network created by
 > Docker, which is exposed to the service containers.
 
-More details on how to configure filebeat [here][configuring-filebeat]
+More details on how to configure filebeat [here][configuring-filebeat].
 
 #### Logstash
 
@@ -117,9 +117,9 @@ three stages: `input - filter - output`.
 
 ##### Input
 
-The `input` stages specifies the source of the data to be processed. In this case
+The `input` stage specifies the source of the data to be processed. In this case
 we expect `Filebeat` to harvest the data and pass it to `logstash:5044`. To this
-end we expose the `logstash` service internally at port `5044`.
+end, we expose the `logstash` service internally at port `5044`.
 
     input {
          beats {
@@ -137,12 +137,12 @@ we may use the most suitable among the available filter plugins provided
 with the installation of logstash (see [here][logstash-filter-plugins]).
 
 The raw data in `data/gein-noa-catalog.txt` resemble a csv, but since they were
-scraped the do not conform to a layout of values separated by a single
+scraped, they do not conform to a layout of values separated by a single
 delimiter. If that was the case we could use the `csv` plugin.
 
-Instead we use the `dissect` plugin, that is best suited for processing
+Instead, we use the `dissect` plugin, that is best suited for processing
 rows of the same structure, where tokens are separated by various delimiters
-including padding. An more expensive alternative (in terms of performance) is
+including padding. A more expensive alternative, in terms of performance, is
 `grok` that uses regular expressions to extract the desired tokens.
 
     filter {
@@ -168,7 +168,7 @@ including padding. An more expensive alternative (in terms of performance) is
         }
     }
 
-This stages includes data-conversions (through the `dissect` plugin), field
+This stage includes data-conversions through the `dissect` plugin, field
 mutation throught the `mutate` plugin, and date conversion through the `date`
 plugin. By _field_ we refer here to a particular key in the document.
 
